@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_asis_process_tree" model="ir.ui.view">
+        <field name="name">methodology.asis.process.tree</field>
+        <field name="model">methodology.asis.process</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="business_process"/>
+                <field name="criticality" widget="badge"/>
+                <field name="step_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_asis_process_form" model="ir.ui.view">
+        <field name="name">methodology.asis.process.form</field>
+        <field name="model">methodology.asis.process</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="code" readonly="1"/> - <field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="project_id"/>
+                            <field name="business_process"/>
+                            <field name="functional_area"/>
+                        </group>
+                        <group>
+                            <field name="frequency"/>
+                            <field name="volume_monthly"/>
+                            <field name="criticality"/>
+                            <field name="responsible_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Descripción">
+                            <group>
+                                <field name="description" placeholder="Descripción general..."/>
+                                <field name="trigger" placeholder="¿Qué inicia este proceso?"/>
+                                <field name="systems_used" placeholder="Sistemas actuales..."/>
+                                <field name="documents_generated" placeholder="Documentos que genera..."/>
+                                <field name="pain_points" placeholder="Problemas y puntos de dolor..."/>
+                            </group>
+                        </page>
+                        <page string="Pasos del Proceso">
+                            <field name="step_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="responsible"/>
+                                    <field name="tool_used"/>
+                                    <field name="duration_minutes"/>
+                                    <field name="is_approval"/>
+                                    <field name="pain_point"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_asis_process_kanban" model="ir.ui.view">
+        <field name="name">methodology.asis.process.kanban</field>
+        <field name="model">methodology.asis.process</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="criticality">
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+                            <strong><field name="code"/> - <field name="name"/></strong>
+                            <div><field name="business_process"/></div>
+                            <div><field name="step_count"/> pasos</div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_asis_process" model="ir.actions.act_window">
+        <field name="name">Procesos AS-IS</field>
+        <field name="res_model">methodology.asis.process</field>
+        <field name="view_mode">list,kanban,form</field>
+    </record>
+
+    <menuitem id="menu_asis_processes" name="Procesos AS-IS" parent="menu_methodology_discovery" action="action_asis_process" sequence="20"/>
+</odoo>

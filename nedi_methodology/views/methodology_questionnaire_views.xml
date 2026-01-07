@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_questionnaire_template_tree" model="ir.ui.view">
+        <field name="name">methodology.questionnaire.template.tree</field>
+        <field name="model">methodology.questionnaire.template</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="business_process"/>
+                <field name="question_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_questionnaire_template_form" model="ir.ui.view">
+        <field name="name">methodology.questionnaire.template.form</field>
+        <field name="model">methodology.questionnaire.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="business_process"/>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                            <field name="industry_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="Descripción..."/>
+                    <notebook>
+                        <page string="Preguntas">
+                            <field name="question_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                    <field name="question_type"/>
+                                    <field name="functional_area"/>
+                                    <field name="is_required"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_questionnaire_template" model="ir.actions.act_window">
+        <field name="name">Plantillas de Cuestionarios</field>
+        <field name="res_model">methodology.questionnaire.template</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="view_questionnaire_tree" model="ir.ui.view">
+        <field name="name">methodology.questionnaire.tree</field>
+        <field name="model">methodology.questionnaire</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="project_id"/>
+                <field name="template_id"/>
+                <field name="state" widget="badge"/>
+                <field name="progress" widget="progressbar"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_questionnaire_form" model="ir.ui.view">
+        <field name="name">methodology.questionnaire.form</field>
+        <field name="model">methodology.questionnaire</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_start" string="Iniciar" type="object" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_complete" string="Completar" type="object" class="btn-success" invisible="state != 'in_progress'"/>
+                    <button name="action_reset" string="Reiniciar" type="object" invisible="state == 'draft'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="project_id"/>
+                            <field name="template_id"/>
+                        </group>
+                        <group>
+                            <field name="progress" widget="progressbar"/>
+                            <field name="date_completed"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Respuestas">
+                            <field name="answer_ids">
+                                <list create="0" delete="0" editable="bottom">
+                                    <field name="question_text" readonly="1"/>
+                                    <field name="question_type" readonly="1" column_invisible="1"/>
+                                    <field name="value_boolean" invisible="question_type != 'boolean'"/>
+                                    <field name="value_text" invisible="question_type != 'text'"/>
+                                    <field name="value_integer" invisible="question_type != 'integer'"/>
+                                    <field name="value_selection" invisible="question_type != 'selection'"/>
+                                    <field name="notes"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_answer_form" model="ir.ui.view">
+        <field name="name">methodology.answer.form</field>
+        <field name="model">methodology.answer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="question_text" readonly="1"/>
+                            <field name="question_type" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="value_boolean" invisible="question_type != 'boolean'"/>
+                            <field name="value_text" invisible="question_type != 'text'"/>
+                            <field name="value_integer" invisible="question_type != 'integer'"/>
+                            <field name="value_selection" invisible="question_type != 'selection'"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="notes" placeholder="Notas adicionales..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_questionnaire" model="ir.actions.act_window">
+        <field name="name">Cuestionarios</field>
+        <field name="res_model">methodology.questionnaire</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_questionnaires" name="Cuestionarios" parent="menu_methodology_discovery" action="action_questionnaire" sequence="10"/>
+    <menuitem id="menu_questionnaire_templates" name="Plantillas de Cuestionarios" parent="menu_methodology_config" action="action_questionnaire_template" sequence="10"/>
+</odoo>

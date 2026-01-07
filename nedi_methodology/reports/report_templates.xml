@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_gap" model="ir.actions.report">
+        <field name="name">Reporte GAP Analysis</field>
+        <field name="model">methodology.project</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">nedi_methodology.report_gap_analysis</field>
+        <field name="report_file">nedi_methodology.report_gap_analysis</field>
+        <field name="print_report_name">'GAP Analysis - %s' % object.name</field>
+        <field name="binding_model_id" ref="model_methodology_project"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_gap_analysis">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h1 class="text-center">Reporte GAP Analysis</h1>
+                        <h2 class="text-center" t-field="doc.name"/>
+                        <div class="row mt-4">
+                            <div class="col-6"><strong>Cliente:</strong> <span t-field="doc.partner_id.name"/></div>
+                            <div class="col-6"><strong>Fase:</strong> <span t-field="doc.phase"/></div>
+                        </div>
+                        <t t-set="gaps" t-value="doc.env['methodology.gap'].search([('project_id', '=', doc.id)])"/>
+                        <h3 class="mt-4">Brechas Identificadas</h3>
+                        <table class="table table-bordered table-sm">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                    <th>Tipo</th>
+                                    <th>Prioridad</th>
+                                    <th>Horas</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="gaps" t-as="gap">
+                                    <tr>
+                                        <td t-field="gap.code"/>
+                                        <td t-field="gap.name"/>
+                                        <td t-field="gap.gap_type"/>
+                                        <td t-field="gap.priority"/>
+                                        <td t-field="gap.estimated_hours"/>
+                                        <td t-field="gap.state"/>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <div class="row mt-3">
+                            <div class="col-6"><strong>Total GAPs:</strong> <span t-esc="len(gaps)"/></div>
+                            <div class="col-6"><strong>Total Horas:</strong> <span t-esc="sum(gaps.mapped('estimated_hours'))"/></div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

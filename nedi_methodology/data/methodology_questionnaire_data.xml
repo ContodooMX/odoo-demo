@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="questionnaire_template_general" model="methodology.questionnaire.template">
+            <field name="name">Clasificación General</field>
+            <field name="code">GENERAL</field>
+            <field name="business_process">fin</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="question_gen_001" model="methodology.question.template">
+            <field name="questionnaire_template_id" ref="questionnaire_template_general"/>
+            <field name="code">GEN-001</field>
+            <field name="name">¿Cuántos empleados tiene la empresa?</field>
+            <field name="question_type">integer</field>
+            <field name="is_required">True</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="question_gen_002" model="methodology.question.template">
+            <field name="questionnaire_template_id" ref="questionnaire_template_general"/>
+            <field name="code">GEN-002</field>
+            <field name="name">¿Tiene múltiples sucursales?</field>
+            <field name="question_type">boolean</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="question_gen_003" model="methodology.question.template">
+            <field name="questionnaire_template_id" ref="questionnaire_template_general"/>
+            <field name="code">GEN-003</field>
+            <field name="name">¿Qué sistemas utiliza actualmente?</field>
+            <field name="question_type">text</field>
+            <field name="sequence">3</field>
+        </record>
+
+        <record id="questionnaire_template_sales" model="methodology.questionnaire.template">
+            <field name="name">Ventas y CRM</field>
+            <field name="code">SLS</field>
+            <field name="business_process">sls</field>
+            <field name="sequence">10</field>
+        </record>
+        <record id="question_sls_001" model="methodology.question.template">
+            <field name="questionnaire_template_id" ref="questionnaire_template_sales"/>
+            <field name="code">SLS-001</field>
+            <field name="name">¿Maneja cotizaciones antes de vender?</field>
+            <field name="question_type">boolean</field>
+            <field name="functional_area">Ventas</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="question_sls_002" model="methodology.question.template">
+            <field name="questionnaire_template_id" ref="questionnaire_template_sales"/>
+            <field name="code">SLS-002</field>
+            <field name="name">¿Tiene vendedores externos?</field>
+            <field name="question_type">boolean</field>
+            <field name="functional_area">Ventas</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="question_sls_003" model="methodology.question.template">
+            <field name="questionnaire_template_id" ref="questionnaire_template_sales"/>
+            <field name="code">SLS-003</field>
+            <field name="name">¿Necesita CRM para seguimiento de prospectos?</field>
+            <field name="question_type">boolean</field>
+            <field name="functional_area">CRM</field>
+            <field name="sequence">3</field>
+        </record>
+        <record id="question_sls_004" model="methodology.question.template">
+            <field name="questionnaire_template_id" ref="questionnaire_template_sales"/>
+            <field name="code">SLS-004</field>
+            <field name="name">¿Vende por e-commerce?</field>
+            <field name="question_type">boolean</field>
+            <field name="functional_area">eCommerce</field>
+            <field name="sequence">4</field>
+        </record>
+
+        <record id="questionnaire_template_purchase" model="methodology.questionnaire.template">
+            <field name="name">Compras e Inventario</field>
+            <field name="code">SCM</field>
+            <field name="business_process">scm</field>
+            <field name="sequence">20</field>
+        </record>
+        <record id="question_scm_001" model="methodology.question.template">
+            <field name="questionnaire_template_id" ref="questionnaire_template_purchase"/>
+            <field name="code">SCM-001</field>
+            <field name="name">¿Maneja órdenes de compra formales?</field>
+            <field name="question_type">boolean</field>
+            <field name="functional_area">Compras</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="question_scm_002" model="methodology.question.template">
+            <field name="questionnaire_template_id" ref="questionnaire_template_purchase"/>
+            <field name="code">SCM-002</field>
+            <field name="name">¿Tiene múltiples almacenes?</field>
+            <field name="question_type">boolean</field>
+            <field name="functional_area">Inventario</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="question_scm_003" model="methodology.question.template">
+            <field name="questionnaire_template_id" ref="questionnaire_template_purchase"/>
+            <field name="code">SCM-003</field>
+            <field name="name">¿Maneja números de serie o lotes?</field>
+            <field name="question_type">boolean</field>
+            <field name="functional_area">Inventario</field>
+            <field name="sequence">3</field>
+        </record>
+
+        <record id="questionnaire_template_finance" model="methodology.questionnaire.template">
+            <field name="name">Contabilidad y Finanzas</field>
+            <field name="code">FIN</field>
+            <field name="business_process">fin</field>
+            <field name="sequence">30</field>
+        </record>
+        <record id="question_fin_001" model="methodology.question.template">
+            <field name="questionnaire_template_id" ref="questionnaire_template_finance"/>
+            <field name="code">FIN-001</field>
+            <field name="name">¿Requiere facturación electrónica CFDI?</field>
+            <field name="question_type">boolean</field>
+            <field name="functional_area">Facturación</field>
+            <field name="is_required">True</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="question_fin_002" model="methodology.question.template">
+            <field name="questionnaire_template_id" ref="questionnaire_template_finance"/>
+            <field name="code">FIN-002</field>
+            <field name="name">¿Maneja múltiples cuentas bancarias?</field>
+            <field name="question_type">boolean</field>
+            <field name="functional_area">Bancos</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="question_fin_003" model="methodology.question.template">
+            <field name="questionnaire_template_id" ref="questionnaire_template_finance"/>
+            <field name="code">FIN-003</field>
+            <field name="name">¿Requiere conciliación bancaria?</field>
+            <field name="question_type">boolean</field>
+            <field name="functional_area">Bancos</field>
+            <field name="sequence">3</field>
+        </record>
+    </data>
+</odoo>

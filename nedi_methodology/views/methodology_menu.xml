@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_methodology_root" name="Metodología NEDI" sequence="100"/>
+    
+    <menuitem id="menu_methodology_projects" name="Proyectos" parent="menu_methodology_root" sequence="10"/>
+    
+    <menuitem id="menu_methodology_discovery" name="Discovery" parent="menu_methodology_root" sequence="20"/>
+    
+    <menuitem id="menu_methodology_gaps" name="GAP Analysis" parent="menu_methodology_root" sequence="30"/>
+    
+    <menuitem id="menu_methodology_config" name="Configuración" parent="menu_methodology_root" sequence="90"/>
+</odoo>

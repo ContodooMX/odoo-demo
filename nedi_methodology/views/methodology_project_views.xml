@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sequence_methodology_project" model="ir.sequence">
+        <field name="name">Proyecto Metodología</field>
+        <field name="code">methodology.project</field>
+        <field name="prefix">NEDI-</field>
+        <field name="padding">3</field>
+    </record>
+
+    <record id="view_methodology_project_tree" model="ir.ui.view">
+        <field name="name">methodology.project.tree</field>
+        <field name="model">methodology.project</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="phase"/>
+                <field name="hour_package"/>
+                <field name="state" widget="badge" decoration-success="state == 'done'" decoration-info="state == 'in_progress'" decoration-warning="state == 'draft'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_methodology_project_form" model="ir.ui.view">
+        <field name="name">methodology.project.form</field>
+        <field name="model">methodology.project</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_start" string="Iniciar Proyecto" type="object" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_generate_workplan" string="Generar Plan de Trabajo" type="object" class="btn-secondary" invisible="state != 'in_progress'"/>
+                    <button name="action_done" string="Finalizar" type="object" class="btn-success" invisible="state != 'in_progress'"/>
+                    <button name="action_cancel" string="Cancelar" type="object" invisible="state in ('done', 'cancelled')"/>
+                    <button name="action_draft" string="Volver a Borrador" type="object" invisible="state != 'cancelled'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_tasks" type="object" class="oe_stat_button" icon="fa-tasks" invisible="not task_count">
+                            <field name="task_count" widget="statinfo" string="Tareas"/>
+                        </button>
+                        <button name="action_view_questionnaires" type="object" class="oe_stat_button" icon="fa-question-circle">
+                            <field name="questionnaire_count" widget="statinfo" string="Cuestionarios"/>
+                        </button>
+                        <button name="action_view_asis_processes" type="object" class="oe_stat_button" icon="fa-sitemap">
+                            <field name="asis_process_count" widget="statinfo" string="Procesos AS-IS"/>
+                        </button>
+                        <button name="action_view_gaps" type="object" class="oe_stat_button" icon="fa-exclamation-triangle">
+                            <field name="gap_count" widget="statinfo" string="GAPs"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="code" readonly="1"/> - <field name="name" placeholder="Nombre del proyecto"/></h1>
+                    </div>
+                    <group>
+                        <group string="Cliente">
+                            <field name="partner_id"/>
+                            <field name="industry_id"/>
+                            <field name="company_size"/>
+                            <field name="employee_count"/>
+                        </group>
+                        <group string="Fechas">
+                            <field name="date_start"/>
+                            <field name="date_end_planned"/>
+                            <field name="date_end_real"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Paquete">
+                            <field name="hour_package"/>
+                            <field name="hourly_rate"/>
+                        </group>
+                        <group string="Avance">
+                            <field name="phase"/>
+                            <field name="project_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notas" name="notes">
+                            <field name="notes"/>
+                        </page>
+                        <page string="Dashboard" name="dashboard">
+                            <group>
+                                <group>
+                                    <field name="questionnaire_count" readonly="1"/>
+                                    <field name="asis_process_count" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="gap_count" readonly="1"/>
+                                    <field name="gap_resolved_count" readonly="1"/>
+                                    <field name="total_estimated_hours" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter reload_on_follower="True"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_methodology_project_kanban" model="ir.ui.view">
+        <field name="name">methodology.project.kanban</field>
+        <field name="model">methodology.project</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="phase">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="phase"/>
+                <field name="state"/>
+                <field name="hour_package"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+                            <strong><field name="code"/> - <field name="name"/></strong>
+                            <div><field name="partner_id"/></div>
+                            <div><field name="hour_package"/> | <field name="state" widget="badge"/></div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_methodology_project" model="ir.actions.act_window">
+        <field name="name">Proyectos de Implementación</field>
+        <field name="res_model">methodology.project</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+    <menuitem id="menu_methodology_project_list" name="Proyectos de Implementación" parent="menu_methodology_projects" action="action_methodology_project" sequence="10"/>
+</odoo>

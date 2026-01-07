@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sequence_methodology_gap" model="ir.sequence">
+        <field name="name">GAP Sequence</field>
+        <field name="code">methodology.gap</field>
+        <field name="prefix">GAP-</field>
+        <field name="padding">3</field>
+    </record>
+
+    <record id="view_gap_tree" model="ir.ui.view">
+        <field name="name">methodology.gap.tree</field>
+        <field name="model">methodology.gap</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="gap_type"/>
+                <field name="priority" widget="badge"/>
+                <field name="state" widget="badge"/>
+                <field name="estimated_hours"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_gap_form" model="ir.ui.view">
+        <field name="name">methodology.gap.form</field>
+        <field name="model">methodology.gap</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_analyze" string="Analizar" type="object" class="btn-primary" invisible="state != 'identified'"/>
+                    <button name="action_decide" string="Decidir" type="object" class="btn-primary" invisible="state != 'analyzing'"/>
+                    <button name="action_resolve" string="Resolver" type="object" class="btn-success" invisible="state != 'decided'"/>
+                    <button name="action_reset" string="Reiniciar" type="object" invisible="state == 'identified'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="code" readonly="1"/> - <field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="project_id"/>
+                            <field name="asis_process_id"/>
+                            <field name="gap_type"/>
+                        </group>
+                        <group>
+                            <field name="priority"/>
+                            <field name="estimated_hours"/>
+                            <field name="responsible_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Análisis">
+                            <field name="strategy" placeholder="Estrategia propuesta..."/>
+                        </page>
+                        <page string="Decisión">
+                            <field name="decision" placeholder="Decisión tomada..."/>
+                            <field name="decision_rationale" placeholder="Justificación..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_gap_kanban" model="ir.ui.view">
+        <field name="name">methodology.gap.kanban</field>
+        <field name="model">methodology.gap</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+                            <strong><field name="code"/></strong>
+                            <div><field name="name"/></div>
+                            <div><field name="priority" widget="badge"/> | <field name="estimated_hours"/>h</div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_gap" model="ir.actions.act_window">
+        <field name="name">Brechas (GAPs)</field>
+        <field name="res_model">methodology.gap</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+    <menuitem id="menu_gaps" name="Brechas Identificadas" parent="menu_methodology_gaps" action="action_gap" sequence="10"/>
+</odoo>

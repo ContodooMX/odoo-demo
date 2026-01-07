@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_methodology_project,methodology.project,model_methodology_project,base.group_user,1,1,1,1
+access_methodology_questionnaire_template,methodology.questionnaire.template,model_methodology_questionnaire_template,base.group_user,1,1,1,1
+access_methodology_question_template,methodology.question.template,model_methodology_question_template,base.group_user,1,1,1,1
+access_methodology_questionnaire,methodology.questionnaire,model_methodology_questionnaire,base.group_user,1,1,1,1
+access_methodology_answer,methodology.answer,model_methodology_answer,base.group_user,1,1,1,1
+access_methodology_asis_process,methodology.asis.process,model_methodology_asis_process,base.group_user,1,1,1,1
+access_methodology_asis_step,methodology.asis.step,model_methodology_asis_step,base.group_user,1,1,1,1
+access_methodology_module_catalog,methodology.module.catalog,model_methodology_module_catalog,base.group_user,1,1,1,1
+access_methodology_gap,methodology.gap,model_methodology_gap,base.group_user,1,1,1,1
+access_methodology_task_template,methodology.task.template,model_methodology_task_template,base.group_user,1,1,1,1
+access_methodology_generate_workplan_wizard,methodology.generate.workplan.wizard,model_methodology_generate_workplan_wizard,base.group_user,1,1,1,1
