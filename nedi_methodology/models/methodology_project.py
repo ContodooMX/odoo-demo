@@ -57,6 +57,19 @@ class MethodologyProject(models.Model):
     gap_resolved_count = fields.Integer(compute='_compute_counts')
     total_estimated_hours = fields.Float(compute='_compute_counts')
 
+    @api.onchange('employee_count')
+    def _onchange_employee_count(self):
+        if not self.employee_count:
+            return
+        if self.employee_count <= 10:
+            self.company_size = 'micro'
+        elif self.employee_count <= 50:
+            self.company_size = 'small'
+        elif self.employee_count <= 200:
+            self.company_size = 'medium'
+        else:
+            self.company_size = 'large'
+
     @api.depends_context('lang')
     def _compute_counts(self):
         for record in self:
