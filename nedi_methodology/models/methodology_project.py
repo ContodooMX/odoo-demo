@@ -79,7 +79,6 @@ class MethodologyProject(models.Model):
                 project_vals = {
                     'name': vals.get('name'),
                     'partner_id': vals.get('partner_id'),
-                    'allow_timesheets': True,
                     'description': f"Proyecto de implementación generado desde {vals.get('code', 'NEDI')}"
                 }
                 new_project = self.env['project.project'].create(project_vals)
