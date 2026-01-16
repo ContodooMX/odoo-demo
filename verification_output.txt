@@ -1,0 +1,25 @@
+2026-01-16 20:18:08,217 29940 WARNING ? odoo.tools.config: missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0 
+2026-01-16 20:18:08,218 29940 INFO ? odoo: Odoo version 19.0 
+2026-01-16 20:18:08,218 29940 INFO ? odoo: Using configuration file at c:\users\alber\pycharmprojects\odoo19\odoo.conf 
+2026-01-16 20:18:08,218 29940 INFO ? odoo: addons paths: _NamespacePath(['c:\\Users\\alber\\PycharmProjects\\odoo19\\odoo\\odoo\\addons', 'C:\\Users\\alber\\AppData\\Local\\OpenERP S.A.\\Odoo\\addons\\19.0', 'c:\\users\\alber\\pycharmprojects\\odoo19\\odoo\\addons', 'c:\\users\\alber\\pycharmprojects\\odoo19\\enterprise', 'c:\\users\\alber\\pycharmprojects\\odoo19\\addons']) 
+2026-01-16 20:18:08,222 29940 INFO ? odoo: database: odoo19user@localhost:5432 
+2026-01-16 20:18:09,641 29940 INFO ? odoo.service.server: Initiating shutdown 
+2026-01-16 20:18:09,641 29940 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-01-16 20:18:09,811 29940 INFO odoo19_v16 odoo.modules.loading: loading 1 modules... 
+2026-01-16 20:18:09,818 29940 INFO odoo19_v16 odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-01-16 20:18:09,853 29940 WARNING odoo19_v16 odoo.modules.module: Missing `license` key in manifest for 'sale_customer_code', defaulting to LGPL-3 
+2026-01-16 20:18:09,918 29940 INFO odoo19_v16 odoo.modules.loading: loading 98 modules... 
+2026-01-16 20:18:12,093 29940 WARNING odoo19_v16 odoo.registry: Model attribute '_sql_constraints' is no longer supported, please define model.Constraint on the model. 
+2026-01-16 20:18:12,155 29940 INFO odoo19_v16 odoo.modules.loading: 98 modules loaded in 2.24s, 0 queries (+0 extra) 
+2026-01-16 20:18:12,376 29940 INFO odoo19_v16 odoo.modules.loading: Modules loaded. 
+2026-01-16 20:18:12,450 29940 INFO odoo19_v16 odoo.registry: Registry loaded in 2.788s 
+starting verification...
+Setting up data...
+Data created.
+Testing Generic Scenario (Random Customer)...
+Generic Result: APP-GENERIC
+PASS: Generic code correctly applied.
+Testing Specific Scenario (Specific Customer)...
+Specific Result: APP-SPECIFIC
+PASS: Specific code correctly applied.
+Rollback successful. Verification complete.
