@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- 
+        Códigos EAN para productos de Deco Addict
+        Estos códigos se cargarán automáticamente al instalar/actualizar el módulo
+        
+        NOTA: Si estos registros fallan, puedes agregar los códigos manualmente desde:
+        Ventas > Configuración > Códigos de Producto por Cliente
+        
+        Productos a configurar:
+        - [FURN_1118] Escritorio de esquina → FURN1118
+        - [E-COM12] Silla de conferencia → SILLA_CONF_ACERO
+        -->
+        
+    </data>
+</odoo>

@@ -1,0 +1,35 @@
+﻿python : Traceback (most recent call last):
+At line:1 char:1
++ python test_uuid_extraction.py 2>&1 | Out-File 
+-Encoding utf8 test_re ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback ( 
+   most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Users\alber\PycharmProjects\odoo19\test_uuid_e
+xtraction.py", line 213, in <module>
+    success = run_tests()
+              ^^^^^^^^^^^
+================================================================================
+TEST UNITARIO - Validaci≤n de _get_payment_cfdi_invoice_uuids
+================================================================================
+
+Test 1: M·ltiples nodos <Pago> (caso problemßtico original)
+--------------------------------------------------------------------------------
+UUIDs encontrados: 2
+  1. 7CFA835C-1CFF-4DA7-B5BC-9E2854209F0F
+  2. C5863DB6-B06E-4DD3-99B9-253B424399BF
+  File "C:\Users\alber\PycharmProjects\odoo19\test_uuid_e
+xtraction.py", line 117, in run_tests
+    print("\u2705 PASS - Se encontraron las 2 facturas 
+correctamente")
+  File "C:\Users\alber\AppData\Local\Programs\Python\Pyth
+on312\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encodi
+ng_table)[0]
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+character '\u2705' in position 0: character maps to 
+<undefined>
